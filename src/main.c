@@ -12,29 +12,33 @@
 
 #include "so_long.h"
 
+void end_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_loop_end(game->mlx);
+}
+
+int key_hook(int keycode, t_game *game)
+{
+	printf("%i\n", keycode);
+	if (keycode == 65307)
+		end_game(game);
+}
+
+int mouse_hook(int keycode, t_game *game)
+{
+	printf("%i\n", keycode);
+}
+
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_img_data	img;
-	char *pixel;
-	int color = 0x00FF00;
+	t_game game;
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, 1920, 1080, "so_long!");
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1, 2);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-    pixel = &img.addr[0];
-	pixel[0] = 255;
-	pixel[1] = 255;
-	pixel[2] = 255;
-	pixel[3] = 0;
-	pixel[4] = 255;
-	pixel[5] = 255;
-	pixel[6] = 255;
-	pixel[7] = 0;
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 1, 1);
-	mlx_loop(mlx);
-
+	mlx_key_hook(game.win , key_hook, &game);
+	mlx_mouse_hook(game.win, mouse_hook, &game);
+	mlx_loop(game.mlx);
+	mlx_destroy_display(game.mlx);
+	free(game.mlx);
 }

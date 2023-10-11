@@ -9,6 +9,7 @@
 
 # include <mlx.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct	s_img_data {
 	void	*img;
@@ -18,5 +19,9 @@ typedef struct	s_img_data {
 	int		endian;
 }				t_img_data;
 
+typedef struct s_game {
+	void	*mlx;
+	void	*win;
+}		t_game;
 
 #endif

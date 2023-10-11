@@ -14,7 +14,7 @@ LIBFT_DIR 		= libft
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
   CC_FLAGS	= $(ERROR_FLAGS) -I$(MLX_LINUX)
-  L_FLAGS	= $(ERROR_FLAGS) ./$(MLX_LINUX)/libmlx.a -lXext -lX11 -lm -lXrender
+  L_FLAGS	= $(ERROR_FLAGS) -L./$(MLX_LINUX) -lmlx -lXext -lX11 -lm
 endif
 ifeq ($(UNAME), Darwin)
   CC_FLAGS	= $(ERROR_FLAGS) -I$(MLX_MAC)
