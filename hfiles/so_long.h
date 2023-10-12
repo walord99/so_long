@@ -10,6 +10,8 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 typedef struct	s_img_data {
 	void	*img;
