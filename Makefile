@@ -4,41 +4,37 @@ OBJ_DIR		= obj
 SRC = $(addprefix src/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 CC = gcc
-#ERROR_FLAGS = -Wall -Werror -Wextra
 
 NAME			= so_long
-MLX_LINUX		= minilibx-linux
-MLX_MAC			= minilibx-mac
+MLX				= MLX42
+MLX_LIB			= $(MLX)/build/libmlx42.a
 HEADER_DIR		= hfiles
 LIBFT_DIR 		= libft
-UNAME = $(shell uname -s)
+UNAME 			= $(shell uname -s)
+GLFW			= $(shell brew info glfw | grep files | cut -d " " -f1)/lib/
 ifeq ($(UNAME), Linux)
-  CC_FLAGS	= $(ERROR_FLAGS) -I$(MLX_LINUX)
-  L_FLAGS	= $(ERROR_FLAGS) -L./$(MLX_LINUX) -lmlx -lXext -lX11 -lm
+  L_FLAGS	= -lXext -lX11 -lm
 endif
 ifeq ($(UNAME), Darwin)
-  CC_FLAGS	= $(ERROR_FLAGS) -I$(MLX_MAC)
-  L_FLAGS	= $(ERROR_FLAGS) -L$(MLX_MAC) -l$(MLX_MAC) -framework OpenGL -framework AppKit
+  L_FLAGS	= -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)"
 endif
+CC_FLAGS	= -I$(MLX)/include/ $(ERROR_FLAGS)
+#ERROR_FLAGS = -Wall -Werror -Wextra
 
 ALL: $(NAME)
 
 $(NAME): _mlx _libft $(OBJ_DIR) $(OBJ)
-	$(CC) $(OBJ) $(L_FLAGS) ./$(LIBFT_DIR)/libft.a -o $(NAME)
+	$(CC) $(OBJ) $(L_FLAGS) $(MLX_LIB) ./$(LIBFT_DIR)/libft.a -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CC_FLAGS) -I$(HEADER_DIR) -I$(LIBFT_DIR) -D OS=$(UNAME) -c $< -o $@
+	$(CC) $(CC_FLAGS) $(ERROR_FLAGS) -I$(HEADER_DIR) -I$(LIBFT_DIR) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 _mlx:
-ifeq ($(UNAME), Linux)
-	make -C $(MLX_LINUX)
-endif
-ifeq ($(UNAME), Darwin)
-	make -C $(MLX_MAC)
-endif
+	cmake $(MLX) -B $(MLX)/build
+	make -C $(MLX)/build
 
 _libft:
 	make -C libft
@@ -49,11 +45,4 @@ clean:
 fclean: clean
 	rm -rf $(OBJ_DIR)
 	make -C $(LIBFT_DIR) fclean
-ifeq ($(UNAME), Linux)
-	make -C $(MLX_LINUX) clean
-endif
-ifeq ($(UNAME), Darwin)
-	make -C $(MLX_MAC) clean
-endif
-
-
+	make -C $(MLX)/build clean

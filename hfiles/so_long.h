@@ -7,23 +7,24 @@
 #  endif
 # endif
 
-# include <mlx.h>
-# include <stdlib.h>
+# include <MLX42/MLX42.h>
+# include <stdbool.h>
 # include <stdio.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
+# include <stdlib.h>
 
-typedef struct	s_img_data {
+typedef struct s_img_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img_data;
+}			t_img_data;
 
-typedef struct s_game {
+typedef struct s_game
+{
 	void	*mlx;
 	void	*win;
-}		t_game;
+}			t_game;
 
 #endif

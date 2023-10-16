@@ -6,53 +6,85 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/03 13:08:41 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:15:23 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void end_game(t_game *game)
+#define WIDTH 512
+#define HEIGHT 512
+
+static mlx_image_t	*image;
+
+// -----------------------------------------------------------------------------
+
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int key_press(int keysym, t_game *game)
+void	ft_randomize(void *param)
 {
-	printf("key down: %i\n", keysym);
-	if (keysym == XK_Escape)
-		end_game(game);
+	for (int32_t i = 0; i < image->width; ++i)
+	{
+		for (int32_t y = 0; y < image->height; ++y)
+		{
+			uint32_t color = ft_pixel(
+				rand() % 0xFF, // R
+				rand() % 0xFF, // G
+				rand() % 0xFF, // B
+				rand() % 0xFF  // A
+			);
+			mlx_put_pixel(image, i, y, color);
+		}
+	}
 }
 
-int key_release(int keysym, t_game *game)
+void	ft_hook(void *param)
 {
-	printf("key up: %i\n", keysym);
+	mlx_t	*mlx;
+
+	mlx = param;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		image->instances[0].y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		image->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		image->instances[0].x -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		image->instances[0].x += 5;
 }
 
-int mouse_hook(int keysym, t_game *game)
+// -----------------------------------------------------------------------------
+
+int32_t	main(int32_t argc, const char *argv[])
 {
-	printf("mouse: %i\n", keysym);
-}
+	mlx_t	*mlx;
 
-int no_event(t_game *game)
-{
-	return 0;
-}
-
-int	main(void)
-{
-	t_game game;
-	game.mlx = mlx_init();
-	if(!game.mlx)
-		return 1;
-	game.win = mlx_new_window(game.mlx, 1920, 1080, "so_long!");
-
-	mlx_mouse_hook(game.win, mouse_hook, &game);
-	mlx_loop_hook(game.mlx, no_event, &game);
-	mlx_hook(game.win, KeyPress, KeyPressMask, key_press, &game);
-	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game);
-
-	mlx_loop(game.mlx);
-	mlx_destroy_display(game.mlx);
-	free(game.mlx);
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	if (!(image = mlx_new_image(mlx, 128, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	mlx_loop_hook(mlx, ft_randomize, mlx);
+	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
 }
