@@ -1,6 +1,6 @@
-FILES		= main.c
-SRC_DIR		= src
-OBJ_DIR		= obj
+FILES			= main.c
+SRC_DIR			= src
+OBJ_DIR			= obj
 SRC = $(addprefix src/, $(FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 CC = gcc
@@ -11,14 +11,15 @@ MLX_LIB			= $(MLX)/build/libmlx42.a
 HEADER_DIR		= hfiles
 LIBFT_DIR 		= libft
 UNAME 			= $(shell uname -s)
-GLFW			= $(shell brew info glfw | grep files | cut -d " " -f1)/lib/
+
 ifeq ($(UNAME), Linux)
-  L_FLAGS	= -lXext -lX11 -lm
+  L_FLAGS		= -lXext -lX11 -lm
 endif
 ifeq ($(UNAME), Darwin)
-  L_FLAGS	= -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)"
+  L_FLAGS		= -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)"
+  GLFW			= $(shell brew info glfw | grep files | cut -d " " -f1)/lib/
 endif
-CC_FLAGS	= -I$(MLX)/include/ $(ERROR_FLAGS)
+CC_FLAGS		= -I$(MLX)/include/ $(ERROR_FLAGS)
 #ERROR_FLAGS = -Wall -Werror -Wextra
 
 ALL: $(NAME)
