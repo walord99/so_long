@@ -13,7 +13,7 @@ LIBFT_DIR 		= libft
 UNAME 			= $(shell uname -s)
 
 ifeq ($(UNAME), Linux)
-  L_FLAGS		= -lXext -lX11 -lm
+  L_FLAGS		= -lglfw -lm -ldl
 endif
 ifeq ($(UNAME), Darwin)
   L_FLAGS		= -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)"
@@ -25,7 +25,7 @@ CC_FLAGS		= -I$(MLX)/include/ $(ERROR_FLAGS)
 ALL: $(NAME)
 
 $(NAME): _mlx _libft $(OBJ_DIR) $(OBJ)
-	$(CC) $(OBJ) $(L_FLAGS) $(MLX_LIB) ./$(LIBFT_DIR)/libft.a -o $(NAME)
+	$(CC) $(OBJ) $(MLX_LIB) $(L_FLAGS) ./$(LIBFT_DIR)/libft.a -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CC_FLAGS) $(ERROR_FLAGS) -I$(HEADER_DIR) -I$(LIBFT_DIR) -c $< -o $@
