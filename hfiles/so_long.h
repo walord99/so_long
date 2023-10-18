@@ -8,23 +8,31 @@
 # endif
 
 # include <MLX42/MLX42.h>
+# include <fcntl.h>
+# include <libft.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
 
-typedef struct s_img_data
+typedef enum tile_type
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_img_data;
+	WALL,
+	EMPTY,
+	START,
+	END,
+	COLLECT,
+    ERROR
+}				e_tile_type;
 
-typedef struct s_game
+typedef struct vector
 {
-	void	*mlx;
-	void	*win;
-}			t_game;
+	int			x;
+	int			y;
+}				t_vector;
+
+typedef struct map
+{
+	t_vector	size;
+	e_tile_type	**map;
+}				t_map;
 
 #endif
