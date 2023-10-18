@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/18 19:14:06 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:17:41 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,27 @@ bool	is_map_rectangle(t_list *lines)
 	return (true);
 }
 
-e_tile_type char_to_tile_type(char c)
+e_tile_type	char_to_tile_type(char c)
 {
-	if(c = '1')
-		return WALL;
-	if(c = '0')
-		return EMPTY;
-	if(c = 'P')
-		return START;
-	if(c = 'E')
-		return END;
-	if(c = 'C')
-		return COLLECT;
-	return ERROR;
+	if (c = '1')
+		return (WALL);
+	if (c = '0')
+		return (EMPTY);
+	if (c = 'P')
+		return (START);
+	if (c = 'E')
+		return (END);
+	if (c = 'C')
+		return (COLLECT);
+	return (ERROR);
 }
 
 t_map	*line_to_map(t_list *lines)
 {
 	t_map	*map;
 	int		i;
-	int 	j;
-	char 	*content;
+	int		j;
+	char	*content;
 
 	map = ft_calloc(sizeof(t_map), 1);
 	map->size.x = ft_strlen(lines->content);
@@ -56,19 +56,20 @@ t_map	*line_to_map(t_list *lines)
 	map->map = ft_calloc(sizeof(e_tile_type *), map->size.x + 1);
 	i = 0;
 	while (i < map->size.x)
-		map->map[i++] = ft_calloc(sizeof(e_tile_type), map->size.y); 
+		map->map[i++] = ft_calloc(sizeof(e_tile_type), map->size.y);
 	i = 0;
 	j = 0;
-	while(lines)
+	while (lines)
 	{
 		content = (char *)lines->content;
-		while(content[i])
+		while (content[i])
 		{
-			
+			map->map[i][j] = char_to_tile_type(content[i]);
 			i++;
 		}
 		j++;
 	}
+	return map;
 }
 
 bool	is_map_valid(t_map *map)
