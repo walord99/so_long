@@ -35,4 +35,5 @@ typedef struct map
 	e_tile_type	**map;
 }				t_map;
 
+t_map	*parse_map(char *filepath);
 #endif

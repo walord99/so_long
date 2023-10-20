@@ -1,27 +1,29 @@
-FILES			= main.c
-SRC_DIR			= src
-OBJ_DIR			= obj
-SRC = $(addprefix src/, $(FILES))
-OBJ = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
+FILES			= 	main.c \
+					map_parsing.c \
+					map_validating.c
+SRC_DIR			= 	src
+OBJ_DIR			= 	obj
+SRC				= 	$(addprefix src/, $(FILES))
+OBJ 			= 	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
 CC = gcc
 
-NAME			= so_long
-MLX				= MLX42
-MLX_LIB			= $(MLX)/build/
-HEADER_DIR		= hfiles
-LIBFT_DIR 		= libft
-UNAME 			= $(shell uname -s)
+NAME			= 	so_long
+MLX				= 	MLX42
+MLX_LIB			= 	$(MLX)/build/
+HEADER_DIR		= 	hfiles
+LIBFT_DIR 		= 	libft
+UNAME 			= 	$(shell uname -s)
 
 ifeq ($(UNAME), Linux)
-  OS_L_FLAGS	= -lmlx42 -lglfw -lm -ldl -pthread -lft
+  OS_L_FLAGS	= 	-lmlx42 -lglfw -lm -ldl -pthread -lft
 endif
 ifeq ($(UNAME), Darwin)
-  OS_L_FLAGS	= -framework Cocoa -framework OpenGL -framework IOKit -L"$(shell brew info glfw | grep files | cut -d " " -f1)/lib/" -lft -lglfw 
+  OS_L_FLAGS	= 	-framework Cocoa -framework OpenGL -framework IOKit -L"$(shell brew info glfw | grep files | cut -d " " -f1)/lib/" -lft -lglfw 
 endif
-INCLUDES		= -I$(MLX)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
-#ERROR_FLAGS 	= -Wall -Werror -Wextra
+INCLUDES		= 	-I$(MLX)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
+#ERROR_FLAGS 	= 	-Wall -Werror -Wextra
 
-ALL: $(NAME)
+all: $(NAME)
 
 $(NAME): _mlx _libft $(OBJ_DIR) $(OBJ)
 	$(CC) $(OBJ) -L$(MLX_LIB) -L$(LIBFT_DIR) $(OS_L_FLAGS) -o $(NAME)
