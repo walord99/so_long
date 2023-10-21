@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/20 19:06:08 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/21 02:31:26 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,47 @@ t_map	*parse_map(char *filepath)
 	t_map	*map;
 
 	lines = get_map_lines(filepath);
+	if(!lines)
+	{
+		if(errno == 0)
+			ft_printf("Error\nMap file is empty\n");
+		return NULL;
+	}
 	if (!is_map_rectangle(lines))
 	{
+		ft_printf("Error\nMap isn't rectangular\n");
 		ft_lstclear(lines, &free);
 		return (NULL);
 	}
 	map = line_to_map(lines);
 	lines = ft_lstclear(lines, &free);
 	return (map);
+}
+
+t_list	*get_map_lines(char *filepath)
+{
+	int		fd;
+	char	*line;
+	t_list	*lines;
+
+	lines = NULL;
+	fd = open(filepath, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error\nopen");
+		return (NULL);
+		close(fd);
+	}
+	do
+	{
+		line = get_next_line(fd, 0);
+		if (line)
+			lines = ft_lstadd_back(lines, line);
+	} while (line);
+	close(fd);
+	if(lines)
+		
+	return (lines);
 }
 
 bool	is_map_rectangle(t_list *lines)
@@ -87,27 +120,4 @@ t_map	*line_to_map(t_list *lines)
 		lines = lines->next;
 	}
 	return (map);
-}
-
-t_list	*get_map_lines(char *filepath)
-{
-	int		fd;
-	char	*line;
-	t_list	*lines;
-
-	lines = NULL;
-	fd = open(filepath, O_RDONLY);
-	if (fd == -1)
-	{
-		return (NULL);
-		close(fd);
-	}
-	do
-	{
-		line = get_next_line(fd, 0);
-		if (line)
-			lines = ft_lstadd_back(lines, line);
-	} while (line);
-	close(fd);
-	return (lines);
 }
