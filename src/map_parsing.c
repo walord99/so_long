@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 13:45:03 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 14:07:28 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static bool			is_map_rectangle(t_list *lines);
 static e_tile_type	char_to_tile_type(char c);
-static t_map		*line_to_map(t_list *lines);
+static t_map_data	*line_to_map(t_list *lines);
 static t_list		*get_map_lines(char *filepath);
 
 // TOFREE map
-t_map	*parse_map(char *filepath)
+t_map_data	*parse_map(char *filepath)
 {
-	t_list	*lines;
-	t_map	*map;
+	t_list		*lines;
+	t_map_data	*map;
 
 	lines = get_map_lines(filepath);
 	if (!lines)
@@ -93,14 +93,14 @@ e_tile_type	char_to_tile_type(char c)
 	return (ERROR);
 }
 
-t_map	*line_to_map(t_list *lines)
+t_map_data	*line_to_map(t_list *lines)
 {
-	t_map	*map;
-	int		i;
-	int		j;
-	char	*content;
+	t_map_data	*map;
+	int			i;
+	int			j;
+	char		*content;
 
-	map = ft_calloc(sizeof(t_map), 1);
+	map = ft_calloc(sizeof(t_map_data), 1);
 	map->width = ft_strlen(lines->content);
 	map->height = ft_lstsize(lines);
 	map->map = ft_calloc(sizeof(e_tile_type *), map->width + 1);

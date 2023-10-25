@@ -21,21 +21,22 @@ typedef enum tile_type
 	ERROR
 }				e_tile_type;
 
-typedef struct map
+typedef struct map_data
 {
 	int			height;
 	int			width;
 	e_tile_type	**map;
 	float		size_ratio;
-}				t_map;
+}				t_map_data;
 
 typedef struct game
 {
-	t_map		*map;
+	t_map_data	*map_data;
 	mlx_t		*mlx;
 }				t_game;
 
-t_map			*parse_map(char *filepath);
+t_map_data		*parse_map(char *filepath);
 int				render_map(t_game *game);
+void			free_game(t_game *game);
 
 #endif
