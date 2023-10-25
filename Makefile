@@ -52,7 +52,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx
-
-test:
-	$(CC) $(OBJ) -L$(MLX_LIB) -L$(LIBFT_DIR) $(OS_L_FLAGS) -o $(NAME)
+.PHONY: all, clean, fclean, re, _libft, _mlx
