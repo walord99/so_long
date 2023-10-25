@@ -19,7 +19,7 @@ ifeq ($(UNAME), Linux)
   OS_L_FLAGS	= 	-lmlx42 -lglfw -lm -ldl -pthread -lft
 endif
 ifeq ($(UNAME), Darwin)
-  OS_L_FLAGS	= 	-framework Cocoa -framework OpenGL -framework IOKit -L"$(shell brew info glfw | grep files | cut -d " " -f1)/lib/" -lft -lglfw 
+  OS_L_FLAGS	= 	-framework Cocoa -framework OpenGL -framework IOKit -L"$(shell brew info glfw | grep files | cut -d " " -f1)/lib/" -lft -lglfw -lmlx42
 endif
 INCLUDES		= 	-I$(MLX)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
 #ERROR_FLAGS 	= 	-Wall -Werror -Wextra

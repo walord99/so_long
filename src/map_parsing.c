@@ -6,16 +6,16 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 00:01:21 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 12:56:55 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
-static bool	is_map_rectangle(t_list *lines);
+static bool			is_map_rectangle(t_list *lines);
 static e_tile_type	char_to_tile_type(char c);
-static t_map	*line_to_map(t_list *lines);
-static t_list	*get_map_lines(char *filepath);
+static t_map		*line_to_map(t_list *lines);
+static t_list		*get_map_lines(char *filepath);
 
 // TOFREE map
 t_map	*parse_map(char *filepath)
@@ -24,11 +24,11 @@ t_map	*parse_map(char *filepath)
 	t_map	*map;
 
 	lines = get_map_lines(filepath);
-	if(!lines)
+	if (!lines)
 	{
-		if(errno == 0)
+		if (errno == 0)
 			ft_printf("Error\nMap file is empty\n");
-		return NULL;
+		return (NULL);
 	}
 	if (!is_map_rectangle(lines))
 	{
@@ -62,9 +62,8 @@ t_list	*get_map_lines(char *filepath)
 			lines = ft_lstadd_back(lines, line);
 	} while (line);
 	close(fd);
-	if(lines)
-		
-	return (lines);
+	if (lines)
+		return (lines);
 }
 
 bool	is_map_rectangle(t_list *lines)
@@ -72,7 +71,7 @@ bool	is_map_rectangle(t_list *lines)
 	int	width;
 
 	width = ft_strlen((char *)lines->content);
-	while (lines = lines->next)
+	while (lines == lines->next)
 	{
 		if (ft_strlen((char *)lines->content) != width)
 			return (false);
@@ -82,15 +81,15 @@ bool	is_map_rectangle(t_list *lines)
 
 e_tile_type	char_to_tile_type(char c)
 {
-	if (c = '1')
+	if (c == '1')
 		return (WALL);
-	if (c = '0')
+	if (c == '0')
 		return (EMPTY);
-	if (c = 'P')
+	if (c == 'P')
 		return (START);
-	if (c = 'E')
+	if (c == 'E')
 		return (END);
-	if (c = 'C')
+	if (c == 'C')
 		return (COLLECT);
 	return (ERROR);
 }

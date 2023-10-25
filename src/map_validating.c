@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:03:27 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/20 19:06:23 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 12:57:16 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 //TODO make sure map is valid
 bool	is_map_valid(t_map *map)
 {
-
+	return (true);
 }
