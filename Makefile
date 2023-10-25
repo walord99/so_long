@@ -1,6 +1,7 @@
 FILES			= 	main.c \
 					map_parsing.c \
-					map_validating.c
+					map_validating.c \
+					render_map.c
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
