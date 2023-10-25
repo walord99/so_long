@@ -6,14 +6,14 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 14:07:28 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 15:45:36 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static bool			is_map_rectangle(t_list *lines);
-static e_tile_type	char_to_tile_type(char c);
+static t_tile_type	char_to_tile_type(char c);
 static t_map_data	*line_to_map(t_list *lines);
 static t_list		*get_map_lines(char *filepath);
 
@@ -52,16 +52,19 @@ t_list	*get_map_lines(char *filepath)
 	if (fd == -1)
 	{
 		perror("Error\nopen");
+		fd = close(fd);
 		return (NULL);
-		close(fd);
 	}
-	while (line || !lines)
+	line = get_next_line(fd, false);
+	if (line)
+		lines = ft_lstadd_back(lines, line);
+	while (line)
 	{
 		line = get_next_line(fd, false);
 		if (line)
 			lines = ft_lstadd_back(lines, line);
 	}
-	close(fd);
+	fd = close(fd);
 	return (lines);
 }
 
@@ -78,7 +81,7 @@ bool	is_map_rectangle(t_list *lines)
 	return (true);
 }
 
-e_tile_type	char_to_tile_type(char c)
+t_tile_type	char_to_tile_type(char c)
 {
 	if (c == '1')
 		return (WALL);
@@ -103,10 +106,10 @@ t_map_data	*line_to_map(t_list *lines)
 	map = ft_calloc(sizeof(t_map_data), 1);
 	map->width = ft_strlen(lines->content);
 	map->height = ft_lstsize(lines);
-	map->map = ft_calloc(sizeof(e_tile_type *), map->width + 1);
+	map->map = ft_calloc(sizeof(t_tile_type *), map->width + 1);
 	i = 0;
 	while (i < map->width)
-		map->map[i++] = ft_calloc(sizeof(e_tile_type), map->height);
+		map->map[i++] = ft_calloc(sizeof(t_tile_type), map->height);
 	j = 0;
 	while (lines)
 	{

@@ -31,7 +31,7 @@ $(NAME): _mlx _libft $(OBJ_DIR) $(OBJ)
 	$(CC) $(OBJ) -L$(MLX_LIB) -L$(LIBFT_DIR) $(OS_L_FLAGS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(INCLUDES) $(ERROR_FLAGS) -c $< -o $@
+	$(CC) $(INCLUDES) $(ERROR_FLAGS) -c $< -o $@ -g
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

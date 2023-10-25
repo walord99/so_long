@@ -9,9 +9,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQ_SIZE 100
+# define SQ_SIZE 20
 
-typedef enum tile_type
+typedef enum e_tile_type
 {
 	WALL,
 	EMPTY,
@@ -19,17 +19,17 @@ typedef enum tile_type
 	END,
 	COLLECT,
 	ERROR
-}				e_tile_type;
+}				t_tile_type;
 
-typedef struct map_data
+typedef struct s_map_data
 {
 	int			height;
 	int			width;
-	e_tile_type	**map;
+	t_tile_type	**map;
 	float		size_ratio;
 }				t_map_data;
 
-typedef struct game
+typedef struct s_game
 {
 	t_map_data	*map_data;
 	mlx_t		*mlx;
