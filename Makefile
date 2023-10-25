@@ -55,4 +55,4 @@ re: clean all
 .PHONY: all, clean, fclean, re, libmlx
 
 test:
-	@echo "$(CC) $(OBJ) -L$(MLX_LIB) -L$(LIBFT_DIR) $(OS_L_FLAGS) -o $(NAME)"
+	$(CC) $(OBJ) -L$(MLX_LIB) -L$(LIBFT_DIR) $(OS_L_FLAGS) -o $(NAME)

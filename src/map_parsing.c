@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 12:56:55 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 13:45:03 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,14 @@ t_list	*get_map_lines(char *filepath)
 		return (NULL);
 		close(fd);
 	}
-	do
+	while (line || !lines)
 	{
-		line = get_next_line(fd, 0);
+		line = get_next_line(fd, false);
 		if (line)
 			lines = ft_lstadd_back(lines, line);
-	} while (line);
+	}
 	close(fd);
-	if (lines)
-		return (lines);
+	return (lines);
 }
 
 bool	is_map_rectangle(t_list *lines)

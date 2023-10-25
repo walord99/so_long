@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQUARE_SIZE 200
+# define SQ_SIZE 100
 
 typedef enum tile_type
 {
