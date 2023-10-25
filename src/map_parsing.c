@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/21 02:31:26 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/25 00:01:21 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ t_map	*line_to_map(t_list *lines)
 	char	*content;
 
 	map = ft_calloc(sizeof(t_map), 1);
-	map->size.x = ft_strlen(lines->content);
-	map->size.y = ft_lstsize(lines);
-	map->map = ft_calloc(sizeof(e_tile_type *), map->size.x + 1);
+	map->width = ft_strlen(lines->content);
+	map->height = ft_lstsize(lines);
+	map->map = ft_calloc(sizeof(e_tile_type *), map->width + 1);
 	i = 0;
-	while (i < map->size.x)
-		map->map[i++] = ft_calloc(sizeof(e_tile_type), map->size.y);
+	while (i < map->width)
+		map->map[i++] = ft_calloc(sizeof(e_tile_type), map->height);
 	j = 0;
 	while (lines)
 	{

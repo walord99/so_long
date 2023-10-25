@@ -1,12 +1,6 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# ifdef OS
-#  if OS == Linux
-#   define mlx_new_image mlx_new_image_alpha
-#  endif
-# endif
-
 # include <MLX42/MLX42.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -14,6 +8,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+
+# define SQUARE_SIZE 200
 
 typedef enum tile_type
 {
@@ -25,16 +21,12 @@ typedef enum tile_type
 	ERROR
 }				e_tile_type;
 
-typedef struct vector
-{
-	int			x;
-	int			y;
-}				t_vector;
-
 typedef struct map
 {
-	t_vector	size;
+	int			height;
+	int			width;
 	e_tile_type	**map;
+	float		size_ratio;
 }				t_map;
 
 typedef struct game
