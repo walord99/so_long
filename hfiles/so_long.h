@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQ_SIZE 20
+# define SQ_SIZE 50
 
 typedef enum e_tile_type
 {

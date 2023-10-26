@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 15:45:36 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:01:42 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ t_map_data	*parse_map(char *filepath)
 	t_map_data	*map;
 
 	lines = get_map_lines(filepath);
-	if (!lines)
-	{
-		if (errno == 0)
-			ft_printf("Error\nMap file is empty\n");
-		return (NULL);
-	}
-	if (!is_map_rectangle(lines))
-	{
-		ft_printf("Error\nMap isn't rectangular\n");
-		ft_lstclear(lines, &free);
-		return (NULL);
-	}
-	map = line_to_map(lines);
+	//if (!lines)
+	//{
+	//	if (errno == 0)
+	//		ft_printf("Error\nMap file is empty\n");
+	//	return (NULL);
+	//}
+	//if (!is_map_rectangle(lines))
+	//{
+	//	ft_printf("Error\nMap isn't rectangular\n");
+	//	ft_lstclear(lines, &free);
+	//	return (NULL);
+	//}
+	//map = line_to_map(lines);
 	lines = ft_lstclear(lines, &free);
 	return (map);
 }
@@ -73,10 +73,11 @@ bool	is_map_rectangle(t_list *lines)
 	int	width;
 
 	width = ft_strlen((char *)lines->content);
-	while (lines == lines->next)
+	while (lines)
 	{
 		if (ft_strlen((char *)lines->content) != width)
 			return (false);
+		lines = lines->next;
 	}
 	return (true);
 }

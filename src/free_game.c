@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:56:07 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 15:06:00 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/26 02:35:20 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_game(t_game *game)
 {
 	if (game->map_data)
 		free_map(game->map_data);
-	mlx_terminate(game->mlx);
+	//mlx_terminate(game->mlx);
 	free(game);
 }
 

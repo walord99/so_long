@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 16:34:49 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:08:01 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	main(int argc, char *argv[])
 
 	game = ft_calloc(sizeof(t_game), 1);
 	game->map_data = parse_map(argv[1]);
-	if (game->map_data)
-	{
-		game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
-				game->map_data->height * SQ_SIZE, "so_long", false);
-		mlx_key_hook(game->mlx, &keyhook, game->mlx);
-		render_map(game);
-		mlx_loop(game->mlx);
-	}
+	//if (game->map_data)
+	//{
+	//	game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
+	//			game->map_data->height * SQ_SIZE, "so_long", false);
+	//	mlx_key_hook(game->mlx, &keyhook, game->mlx);
+	//	render_map(game);
+	//	mlx_loop(game->mlx);
+	//}
 	free_game(game);
 }
