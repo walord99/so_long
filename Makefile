@@ -44,10 +44,10 @@ _libft:
 	make -C libft
 
 clean:
+	rm -rf $(OBJ_DIR)
 	rm -f $(NAME)
 
 fclean: clean
-	rm -rf $(OBJ_DIR)
 	make -C $(LIBFT_DIR) fclean
 	make -C $(MLX)/build clean
 
