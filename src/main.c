@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 16:34:49 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 16:57:04 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 		game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
 				game->map_data->height * SQ_SIZE, "so_long", false);
 		mlx_key_hook(game->mlx, &keyhook, game->mlx);
+		init_game(game);
 		render_map(game);
 		mlx_loop(game->mlx);
 	}
