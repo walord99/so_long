@@ -6,16 +6,47 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 22:28:31 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/30 00:55:53 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	keyhook(mlx_key_data_t keydata, void *mlx)
+bool	is_move_valid(t_game *game, int x, int y)
 {
+	if (game->map_data->map[x][y] == WALL)
+		return (false);
+	else
+		return (true);
+}
+
+void	keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+	int x;
+	int y;
+
+	game = (t_game *)param;
+	x = game->player_x;
+	y = game->player_y;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(mlx);
+		mlx_close_window(game->mlx);
+	if (keydata.action == MLX_PRESS)
+	{
+		if (keydata.key == MLX_KEY_A)
+			x -= 1;
+		if (keydata.key == MLX_KEY_D)
+			x += 1;
+		if (keydata.key == MLX_KEY_W)
+			y -= 1;
+		if (keydata.key == MLX_KEY_S)
+			y += 1;
+		if (is_move_valid(game, x, y))
+		{
+			game->player_x = x;
+			game->player_y = y;
+		}
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -34,7 +65,7 @@ int	main(int argc, char *argv[])
 		load_images(game->mlx, game->images);
 		render_map(game);
 		render_entities(game);
-		mlx_key_hook(game->mlx, &keyhook, game->mlx);
+		mlx_key_hook(game->mlx, &keyhook, game);
 		mlx_loop_hook(game->mlx, &loop_hook, game);
 		mlx_loop(game->mlx);
 	}

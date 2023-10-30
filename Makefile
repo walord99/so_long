@@ -26,8 +26,8 @@ ifeq ($(UNAME), Darwin)
   OS_L_FLAGS	= 	-framework Cocoa -framework OpenGL -framework IOKit -L"$(shell brew info glfw | grep files | cut -d " " -f1)/lib/" -lft -lglfw -lmlx42
 endif
 INCLUDES		= 	-I$(MLX)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
-CC_DEBUG 		= 	-fsanitize=address -fno-omit-frame-pointer
-L_DEBUG			=	-lasan
+#CC_DEBUG 		= 	-fsanitize=address -fno-omit-frame-pointer
+#L_DEBUG		=	-lasan
 #ERROR_FLAGS 	= 	-Wall -Werror -Wextra
 
 all: $(NAME)
@@ -57,5 +57,8 @@ fclean: clean
 	make -C $(MLX)/build clean
 
 re: clean all
+
+valgrind:
+	valgrind --leak-check=full ./so_long maps/test.ber
 
 .PHONY: all, clean, fclean, re, _libft, _mlx
