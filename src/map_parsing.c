@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:56:32 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 22:00:09 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_list	*get_map_lines(char *filepath)
 	t_list	*lines;
 	int		i;
 
-	i = 1;
 	lines = NULL;
 	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
@@ -57,6 +56,8 @@ t_list	*get_map_lines(char *filepath)
 		fd = close(fd);
 		return (NULL);
 	}
+	i = 1;
+	line = NULL;
 	while (line || i--)
 	{
 		line = get_next_line(fd, false);

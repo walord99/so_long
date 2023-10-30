@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
+/*   add_images_window.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:38:14 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:53:15 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 23:09:51 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,22 @@ void	put_tile_to_window(t_game *game, t_images *images, int x, int y)
 	if (map_tile == COLLECT)
 		mlx_image_to_window(game->mlx, images->collect_hi, x * SQ_SIZE, y
 			* SQ_SIZE);
+}
+
+int	render_entities(t_game *game)
+{
+	t_list			*collectables;
+	t_collectible	*collectable;
+
+	mlx_image_to_window(game->mlx, game->images->player_frames[0],
+		game->player_x * SQ_SIZE, game->player_y * SQ_SIZE);
+	collectables = game->collectables;
+	while (collectables)
+	{
+		collectable = (t_collectible *)collectables->content;
+		mlx_image_to_window(game->mlx, game->images->coin, collectable->x
+			* SQ_SIZE, collectable->y * SQ_SIZE);
+		collectables = collectables->next;
+	}
+	return (0);
 }

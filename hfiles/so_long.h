@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:45:00 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 22:48:30 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_collectible
 {
 	int			x;
 	int			y;
+	int			current_frame;
 
 }				t_collectible;
 
@@ -55,6 +56,7 @@ typedef struct s_images
 	mlx_image_t	*exit;
 	mlx_image_t	*collect_hi;
 	mlx_image_t	*player_frames[6];
+	mlx_image_t	*coin;
 }				t_images;
 
 typedef struct s_game
@@ -74,5 +76,6 @@ t_collectible	*init_collectible(int x, int y);
 void			init_game(t_game *game);
 void			loop_hook(void *param);
 void			load_images(mlx_t *mlx, t_images *images);
+int				render_entities(t_game *game);
 
 #endif

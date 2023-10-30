@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:32:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:54:04 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 22:48:53 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_textures
 	mlx_texture_t	*exit;
 	mlx_texture_t	*collect_hi;
 	mlx_texture_t	*char_frames[6];
+	mlx_texture_t	*coin;
 }					t_textures;
 
 static t_textures	load_textures(void);
@@ -39,6 +40,7 @@ void	load_images(mlx_t *mlx, t_images *images)
 	images->collect_hi = texture_to_img_resized(mlx, textures.collect_hi);
 	images->player_frames[0] = texture_to_img_resized(mlx,
 			textures.char_frames[0]);
+	images->coin = texture_to_img_resized(mlx, textures.coin);
 	unload_textures(textures);
 }
 
@@ -52,6 +54,7 @@ t_textures	load_textures(void)
 	textures.exit = mlx_load_png("textures/exit1.png");
 	textures.collect_hi = mlx_load_png("textures/collectHighlight.png");
 	textures.char_frames[0] = mlx_load_png("textures/charFrames/satyr1.png");
+	textures.coin = mlx_load_png("textures/coin1.png");
 	return (textures);
 }
 
@@ -63,6 +66,7 @@ void	unload_textures(t_textures textures)
 	mlx_delete_texture(textures.wall);
 	mlx_delete_texture(textures.collect_hi);
 	mlx_delete_texture(textures.char_frames[0]);
+	mlx_delete_texture(textures.coin);
 }
 
 mlx_image_t	*texture_to_img_resized(mlx_t *mlx, mlx_texture_t *texture)

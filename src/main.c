@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:46:14 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 22:28:31 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char *argv[])
 		init_game(game);
 		load_images(game->mlx, game->images);
 		render_map(game);
+		render_entities(game);
 		mlx_key_hook(game->mlx, &keyhook, game->mlx);
 		mlx_loop_hook(game->mlx, &loop_hook, game);
 		mlx_loop(game->mlx);
