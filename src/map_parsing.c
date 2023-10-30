@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/25 15:45:36 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 21:56:32 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ t_list	*get_map_lines(char *filepath)
 	int		fd;
 	char	*line;
 	t_list	*lines;
+	int		i;
 
+	i = 1;
 	lines = NULL;
 	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
@@ -55,14 +57,13 @@ t_list	*get_map_lines(char *filepath)
 		fd = close(fd);
 		return (NULL);
 	}
-	line = get_next_line(fd, false);
-	if (line)
-		lines = ft_lstadd_back(lines, line);
-	while (line)
+	while (line || i--)
 	{
 		line = get_next_line(fd, false);
-		if (line)
+		if (line && ft_strlen(line) != 0)
 			lines = ft_lstadd_back(lines, line);
+		else
+			free(line);
 	}
 	fd = close(fd);
 	return (lines);
@@ -73,10 +74,11 @@ bool	is_map_rectangle(t_list *lines)
 	int	width;
 
 	width = ft_strlen((char *)lines->content);
-	while (lines == lines->next)
+	while (lines)
 	{
 		if (ft_strlen((char *)lines->content) != width)
 			return (false);
+		lines = lines->next;
 	}
 	return (true);
 }

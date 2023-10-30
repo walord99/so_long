@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 16:57:19 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/29 21:45:00 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_game
 	int			player_x;
 	int			player_y;
 	t_list		*collectables;
+	t_images	*images;
 }				t_game;
 
 t_map_data		*parse_map(char *filepath);
@@ -71,5 +72,7 @@ int				render_map(t_game *game);
 void			free_game(t_game *game);
 t_collectible	*init_collectible(int x, int y);
 void			init_game(t_game *game);
+void			loop_hook(void *param);
+void			load_images(mlx_t *mlx, t_images *images);
 
 #endif

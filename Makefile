@@ -3,7 +3,9 @@ FILES			= 	main.c \
 					map_validating.c \
 					render_map.c \
 					free_game.c \
-					init.c
+					init.c \
+					loop_hook.c \
+					load_images.c
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
