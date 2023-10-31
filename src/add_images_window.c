@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:38:14 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 23:09:51 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/30 23:22:22 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	render_entities(t_game *game)
 		collectable = (t_collectible *)collectables->content;
 		mlx_image_to_window(game->mlx, game->images->coin, collectable->x
 			* SQ_SIZE, collectable->y * SQ_SIZE);
+		collectable->instance_nb = game->images->coin->count - 1;
 		collectables = collectables->next;
 	}
 	return (0);
