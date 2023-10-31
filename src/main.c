@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/30 23:26:49 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/30 23:45:01 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,35 @@ bool	compare_collect_struct(t_collectible *s1, t_collectible *s2)
 	return (false);
 }
 
-bool	move(t_game *game, int x, int y)
+void	move(t_game *game, int x, int y)
 {
 	t_collectible	data;
 	t_collectible	*collect;
 
-	if (game->map_data->map[x][y] != WALL)
+	if (game->map_data->map[x][y] == WALL)
+		return ;
+	game->move_count++;
+	ft_printf("%i\n", game->move_count);
+	game->player_x = x;
+	game->player_y = y;
+	game->images->player_frames[0]->instances->x = x * SQ_SIZE;
+	game->images->player_frames[0]->instances->y = y * SQ_SIZE;
+	if (game->map_data->map[x][y] == COLLECT)
 	{
-		game->player_x = x;
-		game->player_y = y;
-		game->images->player_frames[0]->instances->x = x * SQ_SIZE;
-		game->images->player_frames[0]->instances->y = y * SQ_SIZE;
-		if (game->map_data->map[x][y] == COLLECT)
+		data.x = x;
+		data.y = y;
+		collect = (t_collectible *)ft_lstfind_one((void *)game->collectables,
+				(void *)&compare_collect_struct, &data)->content;
+		if (!collect->is_collected)
 		{
-			data.x = x;
-			data.y = y;
-			collect = (t_collectible *)ft_lstfind_one((void *)game->collectables,
-					(void *)&compare_collect_struct, &data)->content;
 			game->images->coin->instances[collect->instance_nb].enabled = false;
+			game->collected++;
+			collect->is_collected = true;
 		}
-		if (game->map_data->map[x][y] == END)
-			mlx_close_window(game->mlx);
 	}
+	if (game->map_data->map[x][y] == END
+		&& game->collected == game->collectables_amount)
+		mlx_close_window(game->mlx);
 }
 
 void	keyhook(mlx_key_data_t keydata, void *param)

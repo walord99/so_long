@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:43 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 21:48:15 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/30 23:33:57 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_game(t_game *game)
 			{
 				game->collectables = ft_lstadd_back(game->collectables,
 						init_collectible(x, y));
+				game->collectables_amount++;
 			}
 			y++;
 		}
@@ -46,5 +47,6 @@ t_collectible	*init_collectible(int x, int y)
 	collectable = ft_calloc(sizeof(t_collectible), 1);
 	collectable->x = x;
 	collectable->y = y;
+	collectable->is_collected = false;
 	return (collectable);
 }
