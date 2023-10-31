@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/30 23:45:01 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:59:08 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ bool	compare_collect_struct(t_collectible *s1, t_collectible *s2)
 	return (false);
 }
 
+void game_state_end(t_game *game)
+{
+	game->game_state = END;
+	mlx_close_window(game->mlx);
+
+}
+
 void	move(t_game *game, int x, int y)
 {
 	t_collectible	data;
@@ -28,8 +35,8 @@ void	move(t_game *game, int x, int y)
 		return ;
 	game->move_count++;
 	ft_printf("%i\n", game->move_count);
-	game->player_x = x;
-	game->player_y = y;
+	game->player.x = x;
+	game->player.y = y;
 	game->images->player_frames[0]->instances->x = x * SQ_SIZE;
 	game->images->player_frames[0]->instances->y = y * SQ_SIZE;
 	if (game->map_data->map[x][y] == COLLECT)
@@ -45,9 +52,9 @@ void	move(t_game *game, int x, int y)
 			collect->is_collected = true;
 		}
 	}
-	if (game->map_data->map[x][y] == END
+	if (game->map_data->map[x][y] == EXIT
 		&& game->collected == game->collectables_amount)
-		mlx_close_window(game->mlx);
+		game_state_end(game);
 }
 
 void	keyhook(mlx_key_data_t keydata, void *param)
@@ -57,8 +64,8 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 	int		y;
 
 	game = (t_game *)param;
-	x = game->player_x;
-	y = game->player_y;
+	x = game->player.x;
+	y = game->player.y;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(game->mlx);
 	if (keydata.action == MLX_PRESS)
@@ -88,7 +95,7 @@ int	main(int argc, char *argv[])
 		game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
 				game->map_data->height * SQ_SIZE, "so_long", false);
 		init_game(game);
-		load_images(game->mlx, game->images);
+		get_images(game->mlx, game->images);
 		render_map(game);
 		render_entities(game);
 		mlx_key_hook(game->mlx, &keyhook, game);

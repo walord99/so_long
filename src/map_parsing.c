@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 22:00:09 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:53:12 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_tile_type	char_to_tile_type(char c)
 	if (c == 'P')
 		return (START);
 	if (c == 'E')
-		return (END);
+		return (EXIT);
 	if (c == 'C')
 		return (COLLECT);
 	return (ERROR);

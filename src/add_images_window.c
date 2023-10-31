@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:38:14 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/30 23:22:22 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:57:50 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	render_entities(t_game *game)
 	t_collectible	*collectable;
 
 	mlx_image_to_window(game->mlx, game->images->player_frames[0],
-		game->player_x * SQ_SIZE, game->player_y * SQ_SIZE);
+		game->player.x * SQ_SIZE, game->player.y * SQ_SIZE);
 	collectables = game->collectables;
 	while (collectables)
 	{

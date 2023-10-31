@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 17:15:54 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/30 18:39:36 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:56:38 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ void	loop_hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
+	
     
 }

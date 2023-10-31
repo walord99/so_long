@@ -5,7 +5,7 @@ FILES			= 	main.c \
 					free_game.c \
 					init.c \
 					loop_hook.c \
-					load_images.c
+					load_images/load_images.c
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
@@ -40,6 +40,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/load_images
 
 _mlx:
 	cmake $(MLX) -B $(MLX)/build

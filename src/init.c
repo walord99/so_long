@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:43 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/30 23:33:57 by bplante          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:58:04 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_game(t_game *game)
 		{
 			if (game->map_data->map[x][y] == START)
 			{
-				game->player_x = x;
-				game->player_y = y;
+				game->player.x = x;
+				game->player.y = y;
 			}
 			else if (game->map_data->map[x][y] == COLLECT)
 			{
@@ -38,6 +38,7 @@ void	init_game(t_game *game)
 		}
 		x++;
 	}
+	game->game_state = PLAYING;
 }
 
 t_collectible	*init_collectible(int x, int y)
