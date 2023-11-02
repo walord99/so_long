@@ -6,13 +6,14 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:38:14 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/31 16:57:50 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/02 14:31:00 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static void	put_tile_to_window(t_game *game, t_images *images, int x, int y);
+static void add_frames_to_window(mlx_t *mlx, mlx_image_t *imgs[], int x, int y);
 
 int	render_map(t_game *game)
 {
@@ -56,7 +57,7 @@ int	render_entities(t_game *game)
 	t_list			*collectables;
 	t_collectible	*collectable;
 
-	mlx_image_to_window(game->mlx, game->images->player_frames[0],
+	add_frames_to_window(game->mlx, game->images->player_frames,
 		game->player.x * SQ_SIZE, game->player.y * SQ_SIZE);
 	collectables = game->collectables;
 	while (collectables)
@@ -68,4 +69,15 @@ int	render_entities(t_game *game)
 		collectables = collectables->next;
 	}
 	return (0);
+}
+
+void add_frames_to_window(mlx_t *mlx, mlx_image_t *imgs[], int x, int y)
+{
+	int i = 0;
+	while(imgs[i])
+	{
+		mlx_image_to_window(mlx, imgs[i], x, y);
+		i++;
+	}
+	imgs[0]->enabled = true;
 }

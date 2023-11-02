@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:56:07 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/29 23:07:38 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/02 14:10:31 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	free_game(t_game *game)
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 	game->collectables = ft_lstclear(game->collectables, &free);
+	if (game->images)
+		free(game->images->player_frames);
 	free(game->images);
 	free(game);
 }

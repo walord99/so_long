@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/31 16:59:08 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/02 14:34:26 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ void game_state_end(t_game *game)
 
 }
 
+void move_frames(mlx_image_t *imgs[], int x, int y)
+{
+	int i = 0;
+	while(imgs[i])
+	{
+		imgs[i]->instances->x = x;
+		imgs[i]->instances->y = y;
+		i++;
+	}
+}
+
 void	move(t_game *game, int x, int y)
 {
 	t_collectible	data;
@@ -37,8 +48,7 @@ void	move(t_game *game, int x, int y)
 	ft_printf("%i\n", game->move_count);
 	game->player.x = x;
 	game->player.y = y;
-	game->images->player_frames[0]->instances->x = x * SQ_SIZE;
-	game->images->player_frames[0]->instances->y = y * SQ_SIZE;
+	move_frames(game->images->player_frames, x * SQ_SIZE, y * SQ_SIZE);
 	if (game->map_data->map[x][y] == COLLECT)
 	{
 		data.x = x;
@@ -95,7 +105,7 @@ int	main(int argc, char *argv[])
 		game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
 				game->map_data->height * SQ_SIZE, "so_long", false);
 		init_game(game);
-		get_images(game->mlx, game->images);
+		load_images(game->mlx, game->images);
 		render_map(game);
 		render_entities(game);
 		mlx_key_hook(game->mlx, &keyhook, game);

@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/31 16:57:29 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/02 15:16:25 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQ_SIZE 100
+# define SQ_SIZE 200
 
 typedef enum e_game_state
 {
@@ -71,7 +71,7 @@ typedef struct s_images
 	mlx_image_t		*start;
 	mlx_image_t		*exit;
 	mlx_image_t		*collect_hi;
-	mlx_image_t		*player_frames[6];
+	mlx_image_t		**player_frames;
 	mlx_image_t		*coin;
 }					t_images;
 
@@ -86,6 +86,7 @@ typedef struct s_game
 	int				collected;
 	int				move_count;
 	t_game_state	game_state;
+	double			animate_delay;
 }					t_game;
 
 t_map_data			*parse_map(char *filepath);
@@ -94,7 +95,7 @@ void				free_game(t_game *game);
 t_collectible		*init_collectible(int x, int y);
 void				init_game(t_game *game);
 void				loop_hook(void *param);
-void				get_images(mlx_t *mlx, t_images *images);
+void				load_images(mlx_t *mlx, t_images *images);
 int					render_entities(t_game *game);
 
 #endif
