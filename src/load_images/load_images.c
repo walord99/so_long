@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:32:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/02 14:28:22 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/04 13:46:00 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_textures
 
 void				load_textures(t_textures *textures);
 static void			unload_textures(t_textures *textures);
-static void			get_map_images(mlx_t *mlx, t_images *images);
 static mlx_image_t	*texture_to_img_resized(mlx_t *mlx, mlx_texture_t *texture);
 
 mlx_texture_t	**load_frames(char *base_path, int frame_amount)

@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/02 14:34:26 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/04 13:42:11 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void move_frames(mlx_image_t *imgs[], int x, int y)
 	int i = 0;
 	while(imgs[i])
 	{
-		imgs[i]->instances->x = x;
+		imgs[i]->instances->x = x; 
 		imgs[i]->instances->y = y;
 		i++;
 	}
@@ -95,8 +95,9 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
-	int		exit;
 
+	if (argc == 1)
+		return 1;
 	game = ft_calloc(sizeof(t_game), 1);
 	game->images = ft_calloc(sizeof(t_images), 1);
 	game->map_data = parse_map(argv[1]);

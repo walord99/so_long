@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 17:15:54 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/02 15:49:38 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/04 13:45:26 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	animate(t_game *game, t_list *coll_list)
 {
-	t_collectible	*coll;
-
 	game->animate_delay += game->mlx->delta_time;
 	if (game->animate_delay < 0.2)
 		return ;

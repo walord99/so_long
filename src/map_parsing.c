@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/10/31 16:53:12 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/04 13:43:19 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_list	*get_map_lines(char *filepath)
 
 bool	is_map_rectangle(t_list *lines)
 {
-	int	width;
+	size_t	width;
 
 	width = ft_strlen((char *)lines->content);
 	while (lines)
