@@ -5,7 +5,8 @@ FILES			= 	main.c \
 					free_game.c \
 					init.c \
 					loop_hook.c \
-					load_images/load_images.c
+					load_images/load_images.c \
+					map_flood.c
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
@@ -28,7 +29,7 @@ endif
 INCLUDES		= 	-I$(MLX)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
 #CC_DEBUG 		= 	-fsanitize=address -fno-omit-frame-pointer
 #L_DEBUG		=	-lasan
-#ERROR_FLAGS 	= 	-Wall -Werror -Wextra
+ERROR_FLAGS 	= 	-Wall -Werror -Wextra
 
 all: $(NAME)
 

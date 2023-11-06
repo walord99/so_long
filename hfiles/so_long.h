@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/02 15:16:25 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/06 12:25:34 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_map_data
 	int				height;
 	int				width;
 	t_tile_type		**map;
-	int				collect_total;
 }					t_map_data;
 
 typedef struct s_collectible
@@ -62,7 +61,7 @@ typedef struct s_player
 	int				x;
 	int				y;
 	int				current_frame;
-}				t_player;
+}					t_player;
 
 typedef struct s_images
 {
@@ -97,5 +96,7 @@ void				init_game(t_game *game);
 void				loop_hook(void *param);
 void				load_images(mlx_t *mlx, t_images *images);
 int					render_entities(t_game *game);
+bool				is_map_valid(t_map_data *map_data);
+bool				is_map_completable(t_map_data *map_data);
 
 #endif

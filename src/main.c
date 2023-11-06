@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/04 13:42:11 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/05 16:06:39 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main(int argc, char *argv[])
 	game = ft_calloc(sizeof(t_game), 1);
 	game->images = ft_calloc(sizeof(t_images), 1);
 	game->map_data = parse_map(argv[1]);
-	if (game->map_data)
+	if (game->map_data && is_map_valid(game->map_data))
 	{
 		game->mlx = mlx_init(game->map_data->width * SQ_SIZE,
 				game->map_data->height * SQ_SIZE, "so_long", false);
