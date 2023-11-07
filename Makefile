@@ -1,12 +1,16 @@
 FILES			= 	main.c \
-					map_parsing.c \
-					map_validating.c \
 					add_images_window.c \
 					free_game.c \
 					init.c \
 					loop_hook.c \
+					game_logic.c \
+					\
 					load_images/load_images.c \
-					map_flood.c
+					load_images/texture_loading.c \
+					\
+					map/parsing.c \
+					map/validating.c \
+					map/flood.c
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
@@ -44,6 +48,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/load_images
+	mkdir -p $(OBJ_DIR)/map
 
 $(MLX):
 	cmake $(MLX_DIR) -B $(MLX_BUILD_DIR)
@@ -65,4 +70,4 @@ re: clean all
 valgrind:
 	valgrind --leak-check=full ./so_long maps/test.ber
 
-.PHONY: all, clean, fclean, re, _libft, _mlx
+.PHONY: all, clean, fclean, re

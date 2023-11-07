@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 12:25:34 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/07 00:42:32 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ typedef struct s_player
 	int				current_frame;
 }					t_player;
 
+typedef struct s_textures
+{
+	mlx_texture_t	*wall;
+	mlx_texture_t	*floor;
+	mlx_texture_t	*start;
+	mlx_texture_t	*exit;
+	mlx_texture_t	*collect_hi;
+	mlx_texture_t	**char_frames;
+	mlx_texture_t	*coin;
+}					t_textures;
+
 typedef struct s_images
 {
 	mlx_image_t		*wall;
@@ -88,15 +99,25 @@ typedef struct s_game
 	double			animate_delay;
 }					t_game;
 
-t_map_data			*parse_map(char *filepath);
-int					render_map(t_game *game);
-void				free_game(t_game *game);
-t_collectible		*init_collectible(int x, int y);
 void				init_game(t_game *game);
-void				loop_hook(void *param);
-void				load_images(mlx_t *mlx, t_images *images);
+t_collectible		*init_collectible(int x, int y);
+void				free_game(t_game *game);
+
+int					render_map(t_game *game);
 int					render_entities(t_game *game);
+
+void				loop_hook(void *param);
+
+t_map_data			*parse_map(char *filepath);
 bool				is_map_valid(t_map_data *map_data);
 bool				is_map_completable(t_map_data *map_data);
+
+void				load_images(mlx_t *mlx, t_images *images);
+void				load_textures(t_textures *textures);
+void				unload_textures(t_textures *textures);
+void				unload_frame_textures(mlx_texture_t *txt[]);
+mlx_texture_t		**load_frames_textures(char *base_path, int frame_amount);
+
+void				move(t_game *game, int x, int y);
 
 #endif

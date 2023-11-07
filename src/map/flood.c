@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 21:00:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 13:08:30 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:14:24 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ bool	is_map_completable(t_map_data *map_data)
 	int		start_y;
 	t_args	args;
 
-    start_x = 0;
-    start_y = 0;
+	start_x = 0;
+	start_y = 0;
 	collect_count = count_collectibles_and_get_start(map_data, &start_x,
 			&start_y);
 	args.collect_count = 0;
@@ -47,9 +47,7 @@ bool	is_map_completable(t_map_data *map_data)
 	if (collect_count != args.collect_count)
 		ft_printf("Unreachable collectable(s)\n");
 	else
-	{
 		ft_printf("Unreachable exit\n");
-	}
 	return (false);
 }
 

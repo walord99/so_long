@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validating.c                                   :+:      :+:    :+:   */
+/*   validating.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:03:27 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 13:13:01 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/07 00:47:21 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ static bool	invalid_character_check(t_map_data *map_data);
 // TODO make sure map is valid
 bool	is_map_valid(t_map_data *map_data)
 {
-	if (!invalid_character_check(map_data) || !exit_start_check(map_data)
-		|| !is_map_walled(map_data) || !is_map_completable(map_data))
+	if (!invalid_character_check(map_data))
+		return (false);
+	if (!exit_start_check(map_data))
+		return (false);
+	if (!is_map_walled(map_data))
+		return (false);
+	if (!is_map_completable(map_data))
 		return (false);
 	return (true);
 }
@@ -70,7 +75,7 @@ bool	exit_start_check(t_map_data *map_data)
 		{
 			if (map_data->map[x][y] == START)
 				start_counter++;
-			if (map_data->map[x][y] == EXIT)
+			else if (map_data->map[x][y] == EXIT)
 				exit_counter++;
 			x++;
 		}
@@ -86,7 +91,7 @@ bool	check_error_msg(int exit_counter, int start_counter)
 	ret_val = false;
 	if (start_counter == 0)
 		ft_printf("Error\nNo starting tile\n");
-	else if (start_counter > 2)
+	else if (start_counter > 1)
 		ft_printf("Error\nMore than one starting tile\n");
 	else if (exit_counter == 0)
 		ft_printf("Error\nNo exit tile\n");
@@ -108,7 +113,7 @@ bool	invalid_character_check(t_map_data *map_data)
 		{
 			if (map_data->map[x][y] == ERROR)
 			{
-				ft_printf("Error\nInvalid character at (%i, %i)", x, y);
+				ft_printf("Error\nInvalid character at (%i, %i)\n", x, y);
 				return (false);
 			}
 			x++;
