@@ -7,15 +7,20 @@ FILES			= 	main.c \
 					\
 					load_images/load_images.c \
 					load_images/texture_loading.c \
+					load_images/load_font.c \
 					\
 					map/parsing.c \
 					map/validating.c \
-					map/flood.c
+					map/flood.c \
+					\
+					overlay/text.c \
+					overlay/move_tracker.c
+
 SRC_DIR			= 	src
 OBJ_DIR			= 	obj
 SRC				= 	$(addprefix src/, $(FILES))
 OBJ 			= 	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
-CC				 = gcc
+CC				= 	gcc
 
 NAME			= 	so_long
 MLX_DIR			= 	MLX42
@@ -35,7 +40,7 @@ endif
 INCLUDES		= 	-I$(MLX_DIR)/include/ -I$(HEADER_DIR) -I$(LIBFT_DIR)
 #CC_DEBUG 		= 	-fsanitize=address -fno-omit-frame-pointer
 #L_DEBUG		=	-lasan
-ERROR_FLAGS 	= 	-Wall -Werror -Wextra
+#ERROR_FLAGS 	= 	-Wall -Werror -Wextra
 
 all: $(NAME)
 
@@ -46,9 +51,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CC_DEBUG) -O1 $(INCLUDES) $(ERROR_FLAGS) -c $< -o $@ -g
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)/load_images
-	mkdir -p $(OBJ_DIR)/map
+	mkdir $(OBJ_DIR)
+	mkdir $(OBJ_DIR)/load_images
+	mkdir $(OBJ_DIR)/map
+	mkdir $(OBJ_DIR)/overlay
 
 $(MLX):
 	cmake $(MLX_DIR) -B $(MLX_BUILD_DIR)
@@ -67,7 +73,7 @@ fclean: clean
 
 re: clean all
 
-valgrind:
+valgrind: all
 	valgrind --leak-check=full ./so_long maps/test.ber
 
 .PHONY: all, clean, fclean, re

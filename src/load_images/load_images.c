@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:32:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 19:20:30 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/26 02:18:15 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ mlx_image_t	**load_frame_imgs(mlx_t *mlx, mlx_texture_t *txt[])
 	int			i;
 	mlx_image_t	**img;
 
-	img = ft_calloc(sizeof(mlx_image_t *), ptr_arrlen((void **)txt) + 1);
+	img = ft_calloc(sizeof(mlx_image_t *), tab_len((void **)txt) + 1);
 	i = 0;
 	while (txt[i])
 	{

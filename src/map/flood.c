@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_flood.c                                        :+:      :+:    :+:   */
+/*   flood.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 21:00:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 15:14:24 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/26 02:19:21 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	free_check_map(bool **check_map)
 	int	size;
 
 	i = 0;
-	size = ptr_arrlen((void **)check_map);
+	size = tab_len((void **)check_map);
 	while (i < size)
 		free(check_map[i++]);
 	free(check_map);

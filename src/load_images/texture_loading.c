@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 19:10:33 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/06 19:26:19 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/26 23:29:59 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,15 @@ void	unload_textures(t_textures *textures)
 mlx_texture_t	**load_frames_textures(char *base_path, int frame_amount)
 {
 	int				i;
-	char			*temp;
 	char			*full_path;
-	char			*file_type;
 	mlx_texture_t	**txt_ptr;
 
 	txt_ptr = ft_calloc(sizeof(mlx_texture_t *), frame_amount + 1);
 	i = 0;
-	file_type = ".png";
 	while (i++ < frame_amount)
 	{
-		temp = ft_strjoin_free(ft_itoa(i), file_type);
-		full_path = ft_strjoin(base_path, temp);
-		free(temp);
+		full_path = ft_strjoin_free(base_path, ft_strjoin_free(ft_itoa(i),
+					".png", FREE_S1), FREE_S2);
 		txt_ptr[i - 1] = mlx_load_png(full_path);
 		free(full_path);
 	}

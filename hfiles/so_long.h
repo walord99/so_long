@@ -6,12 +6,13 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/07 00:42:32 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/27 00:49:40 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define NDEBUG
 
 # include <MLX42/MLX42.h>
 # include <errno.h>
@@ -21,7 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQ_SIZE 200
+# define SQ_SIZE 150
+# define TEXT_RATIO 0.7
 
 typedef enum e_game_state
 {
@@ -85,6 +87,12 @@ typedef struct s_images
 	mlx_image_t		*coin;
 }					t_images;
 
+typedef struct s_text
+{
+	char			*str;
+	mlx_image_t		**chars;
+}					t_text;
+
 typedef struct s_game
 {
 	t_map_data		*map_data;
@@ -97,14 +105,20 @@ typedef struct s_game
 	int				move_count;
 	t_game_state	game_state;
 	double			animate_delay;
+	mlx_texture_t	*font[95];
+	int				font_width;
+	float			font_size_x;
+	t_text			*move_tracker;
 }					t_game;
 
 void				init_game(t_game *game);
 t_collectible		*init_collectible(int x, int y);
+void				init_text_data(t_game *game);
 void				free_game(t_game *game);
 
 int					render_map(t_game *game);
 int					render_entities(t_game *game);
+void				render_tracker(t_game *game);
 
 void				loop_hook(void *param);
 
@@ -117,7 +131,14 @@ void				load_textures(t_textures *textures);
 void				unload_textures(t_textures *textures);
 void				unload_frame_textures(mlx_texture_t *txt[]);
 mlx_texture_t		**load_frames_textures(char *base_path, int frame_amount);
+void				load_font(t_game *game);
+void				unload_font(t_game *game);
 
 void				move(t_game *game, int x, int y);
+void				change_tracker(t_game *game);
+
+t_text				*create_text(t_game *game, char *str, int x, int y);
+void				destroy_text(t_text *text, mlx_t *mlx);
+int					change_text(t_game *game, t_text *text, char *new_string);
 
 #endif
