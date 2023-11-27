@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:56:07 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 00:59:36 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/27 01:04:06 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	free_game(t_game *game)
 	if (game->font)
 		unload_font(game);
 	if (game->move_tracker)
-	
 	{
 		free(game->move_tracker->str);
 		free(game->move_tracker);

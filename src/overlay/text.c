@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 01:27:21 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 00:58:44 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/27 01:04:19 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ t_text	*create_text(t_game *game, char *str, int x, int y)
 
 void	destroy_text(t_text *text, mlx_t *mlx)
 {
-	int i = 0;
-	while(text->chars[i])
+	int	i;
+
+	i = 0;
+	while (text->chars[i])
 		mlx_delete_image(mlx, text->chars[i++]);
 	free(text->chars);
 	free(text->str);
