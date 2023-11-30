@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:56:07 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 01:04:06 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:26:50 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	free_game(t_game *game)
 	game->collectables = ft_lstclear(game->collectables, &free);
 	if (game->images)
 		free(game->images->player_frames);
-	if (game->font)
-		unload_font(game);
+	unload_font(game);
 	if (game->move_tracker)
 	{
 		free(game->move_tracker->str);

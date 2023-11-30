@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 21:00:09 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/26 02:19:21 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:34:06 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ bool	is_map_completable(t_map_data *map_data)
 	free_check_map(args.is_checked);
 	if (collect_count == args.collect_count && args.exit == true)
 		return (true);
-	ft_printf("Error\nMap isn't completable: ");
+	ft_printf_fd("Error\nMap isn't completable: ", 2);
 	if (collect_count != args.collect_count)
-		ft_printf("Unreachable collectable(s)\n");
+		ft_printf_fd("Unreachable collectable(s)\n", 2);
 	else
-		ft_printf("Unreachable exit\n");
+		ft_printf_fd("Unreachable exit\n", 2);
 	return (false);
 }
 

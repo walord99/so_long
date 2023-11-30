@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:46 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/29 15:36:16 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:34:35 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_map_data	*parse_map(char *filepath)
 	if (!lines)
 	{
 		if (errno == 0)
-			ft_printf("Error\nMap file is empty\n");
+			ft_printf_fd("Error\nMap file is empty\n", 2);
 		return (NULL);
 	}
 	if (!is_map_rectangle(lines))
 	{
-		ft_printf("Error\nMap isn't rectangular\n");
+		ft_printf_fd("Error\nMap isn't rectangular\n", 2);
 		ft_lstclear(lines, &free);
 		return (NULL);
 	}

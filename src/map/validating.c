@@ -6,14 +6,15 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:03:27 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/07 00:47:21 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:45:23 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static bool	is_map_walled(t_map_data *map_data);
-static bool	check_error_msg(int exit_counter, int start_counter);
+static bool	check_error_msg(int exit_counter, int start_counter,
+				int collect_counter);
 static bool	exit_start_check(t_map_data *map_data);
 static bool	invalid_character_check(t_map_data *map_data);
 
@@ -54,7 +55,7 @@ bool	is_map_walled(t_map_data *map_data)
 		i++;
 	}
 	if (!ret_val)
-		ft_printf("Error\nMap isn't walled properly\n");
+		ft_printf_fd("Error\nMap isn't walled properly\n", 2);
 	return (ret_val);
 }
 
@@ -62,39 +63,44 @@ bool	exit_start_check(t_map_data *map_data)
 {
 	int	exit_counter;
 	int	start_counter;
+	int	collect_counter;
 	int	x;
 	int	y;
 
+	collect_counter = 0;
 	exit_counter = 0;
 	start_counter = 0;
 	y = 0;
-	while (y < map_data->height)
+	while (y++ < map_data->height)
 	{
 		x = 0;
 		while (x < map_data->width)
 		{
-			if (map_data->map[x][y] == START)
+			if (map_data->map[x][y - 1] == START)
 				start_counter++;
-			else if (map_data->map[x][y] == EXIT)
+			else if (map_data->map[x][y - 1] == EXIT)
 				exit_counter++;
+			else if (map_data->map[x][y - 1] == COLLECT)
+				collect_counter++;
 			x++;
 		}
-		y++;
 	}
-	return (check_error_msg(exit_counter, start_counter));
+	return (check_error_msg(exit_counter, start_counter, collect_counter));
 }
 
-bool	check_error_msg(int exit_counter, int start_counter)
+bool	check_error_msg(int exit_counter, int start_counter, int collec_counter)
 {
 	bool	ret_val;
 
 	ret_val = false;
 	if (start_counter == 0)
-		ft_printf("Error\nNo starting tile\n");
+		ft_printf_fd("Error\nNo starting tile\n", 2);
 	else if (start_counter > 1)
-		ft_printf("Error\nMore than one starting tile\n");
+		ft_printf_fd("Error\nMore than one starting tile\n", 2);
 	else if (exit_counter == 0)
-		ft_printf("Error\nNo exit tile\n");
+		ft_printf_fd("Error\nNo exit tile\n", 2);
+	else if (collec_counter == 0)
+		ft_printf_fd("Error\nNo collectibles\n", 2);
 	else
 		ret_val = true;
 	return (ret_val);
@@ -113,7 +119,7 @@ bool	invalid_character_check(t_map_data *map_data)
 		{
 			if (map_data->map[x][y] == ERROR)
 			{
-				ft_printf("Error\nInvalid character at (%i, %i)\n", x, y);
+				ft_printf_fd("Error\nInvalid character at (%i, %i)\n", 2, x, y);
 				return (false);
 			}
 			x++;
