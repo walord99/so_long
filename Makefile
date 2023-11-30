@@ -59,7 +59,7 @@ $(OBJ_DIR):
 $(MLX):
 	cmake $(MLX_DIR) -B $(MLX_BUILD_DIR)
 	make -C $(MLX_BUILD_DIR)
-
+ 
 $(LIBFT):
 	make -C libft
 
@@ -76,4 +76,4 @@ re: clean all
 valgrind: all
 	valgrind --leak-check=full ./so_long maps/test.ber
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re valgrind
