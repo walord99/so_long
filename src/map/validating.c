@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:03:27 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/30 11:45:23 by bplante          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:57:26 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static bool	check_error_msg(int exit_counter, int start_counter,
 static bool	exit_start_check(t_map_data *map_data);
 static bool	invalid_character_check(t_map_data *map_data);
 
-// TODO make sure map is valid
 bool	is_map_valid(t_map_data *map_data)
 {
 	if (!invalid_character_check(map_data))
@@ -97,8 +96,8 @@ bool	check_error_msg(int exit_counter, int start_counter, int collec_counter)
 		ft_printf_fd("Error\nNo starting tile\n", 2);
 	else if (start_counter > 1)
 		ft_printf_fd("Error\nMore than one starting tile\n", 2);
-	else if (exit_counter == 0)
-		ft_printf_fd("Error\nNo exit tile\n", 2);
+	else if (exit_counter != 1)
+		ft_printf_fd("Error\nInvalide exit amount\n", 2);
 	else if (collec_counter == 0)
 		ft_printf_fd("Error\nNo collectibles\n", 2);
 	else

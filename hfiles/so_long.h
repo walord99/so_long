@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:53:47 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 00:49:40 by bplante          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:01:36 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define SQ_SIZE 150
+# define SQ_SIZE 100
 # define TEXT_RATIO 0.7
 
 typedef enum e_game_state

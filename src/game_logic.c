@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 00:41:06 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 00:44:51 by bplante          ###   ########.fr       */
+/*   Updated: 2023/11/30 12:45:57 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	move(t_game *game, int x, int y)
 	if (game->map_data->map[x][y] == WALL)
 		return ;
 	game->move_count++;
-	change_tracker(game);
 	game->player.x = x;
 	game->player.y = y;
+	change_tracker(game);
 	move_frames(game->images->player_frames, x * SQ_SIZE, y * SQ_SIZE);
 	if (game->map_data->map[x][y] == COLLECT)
 		collect(game, x, y);

@@ -6,7 +6,7 @@
 /*   By: bplante <bplante@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:08:28 by bplante           #+#    #+#             */
-/*   Updated: 2023/11/27 00:41:06 by bplante          ###   ########.fr       */
+/*   Updated: 2023/12/01 14:49:32 by bplante          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 			y -= 1;
 		if (keydata.key == MLX_KEY_S)
 			y += 1;
-		move(game, x, y);
+		if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
+			|| keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
+			move(game, x, y);
 	}
 }
 
